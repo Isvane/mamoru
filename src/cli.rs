@@ -83,6 +83,7 @@ pub fn check_commit(
     path: &Path,
     dict: &Dictionary,
     format: Format,
+    ascii_only: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
     if !path.exists() {
         return Err(format!(
@@ -126,16 +127,18 @@ pub fn check_commit(
                 eprintln!("Commit blocked! Typos found: {}", words.join(", "));
             }
             Format::Long => {
+                let bullet = if ascii_only { '-' } else { '•' };
                 eprintln!("Commit blocked! Typos found in commit message:\n");
                 for (word, suggestions) in typos {
                     let clean_suggestions: Vec<String> =
                         suggestions.into_iter().map(|s| s.key).collect();
 
                     if clean_suggestions.is_empty() {
-                        eprintln!("  • \"{}\" -> No close suggestions found.", word);
+                        eprintln!("  {} \"{}\" -> No close suggestions found.", bullet, word);
                     } else {
                         eprintln!(
-                            "  • \"{}\" -> Did you mean: {}?",
+                            "  {} \"{}\" -> Did you mean: {}?",
+                            bullet,
                             word,
                             clean_suggestions.join(", ")
                         );

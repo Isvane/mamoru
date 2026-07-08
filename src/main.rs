@@ -18,7 +18,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let dict = fuzzies::Dictionary::from_embedded(DICTIONARY_DATA)?;
 
-    if let Err(e) = check_commit(&args.path, &dict, args.format) {
+    if let Err(e) = check_commit(&args.path, &dict, args.format, args.ascii_only) {
         match args.format {
             Format::Silent => {}
             Format::Brief | Format::Long => {
