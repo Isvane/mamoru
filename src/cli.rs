@@ -1,9 +1,11 @@
 use std::{
+    collections::HashSet,
     fs,
     path::{Path, PathBuf},
 };
 
 use clap::Parser;
+use fuzzies::Dictionary;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, clap::ValueEnum, Default)]
 pub(crate) enum Format {
@@ -74,6 +76,78 @@ pub fn initialization(args: &Args) -> Result<(), Box<dyn std::error::Error>> {
     }
 
     println!("Mamoru installed successfully!");
+    Ok(())
+}
+
+pub fn check_commit(
+    path: &Path,
+    dict: &Dictionary,
+    format: Format,
+) -> Result<(), Box<dyn std::error::Error>> {
+    if !path.exists() {
+        return Err(format!(
+            "Commit message file not found at `{}`. Are you in the middle of a git commit?",
+            path.display()
+        )
+        .into());
+    }
+
+    let content = std::fs::read_to_string(path)?;
+    let lines: Vec<&str> = content
+        .lines()
+        .map(|line| line.trim())
+        .filter(|line| !line.is_empty() && !line.starts_with('#'))
+        .collect();
+
+    let unique_words: HashSet<String> = lines
+        .into_iter()
+        .flat_map(|line| line.split(|c: char| !c.is_alphabetic() && c != '\''))
+        .filter(|word| !word.is_empty())
+        .map(|word| word.trim_matches('\'').to_lowercase())
+        .collect();
+
+    let mut typos = Vec::new();
+
+    for word in unique_words {
+        if !dict.contains(&word) {
+            let suggestions = dict.search(&word).distance(2).limit(3).execute()?;
+
+            typos.push((word, suggestions));
+        }
+    }
+
+    if !typos.is_empty() {
+        match format {
+            Format::Silent => {
+                return Err("".into());
+            }
+            Format::Brief => {
+                let words: Vec<&str> = typos.iter().map(|(word, _)| word.as_str()).collect();
+                eprintln!("Commit blocked! Typos found: {}", words.join(", "));
+            }
+            Format::Long => {
+                eprintln!("Commit blocked! Typos found in commit message:\n");
+                for (word, suggestions) in typos {
+                    let clean_suggestions: Vec<String> =
+                        suggestions.into_iter().map(|s| s.key).collect();
+
+                    if clean_suggestions.is_empty() {
+                        eprintln!("  • \"{}\" -> No close suggestions found.", word);
+                    } else {
+                        eprintln!(
+                            "  • \"{}\" -> Did you mean: {}?",
+                            word,
+                            clean_suggestions.join(", ")
+                        );
+                    }
+                }
+                eprintln!();
+            }
+        }
+
+        return Err("Please fix the spelling errors above.".into());
+    }
+
     Ok(())
 }
 

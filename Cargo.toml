@@ -7,9 +7,10 @@ repository = "https://github.com/Isvane/mamoru"
 license = "MIT"
 documentation = "https://docs.rs/mamoru"
 readme = "./README.md"
-keywords = ["git", "git-hook", "commit-msg", "fst", "spellcheck"]
+keywords = ["git", "git-hook", "typo", "fst", "spellcheck"]
 categories = ["command-line-utilities", "development-tools", "text-processing"]
 edition = "2024"
 
 [dependencies]
 clap = { version = "4.6.1", features = ["derive"] }
+fuzzies = "0.4.2"
