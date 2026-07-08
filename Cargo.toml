@@ -7,7 +7,7 @@ repository = "https://github.com/Isvane/mamoru"
 license = "MIT"
 documentation = "https://docs.rs/mamoru"
 readme = "./README.md"
-keywords = ["git", "git-hook", "typo", "fst", "spellcheck"]
+keywords = ["git-hook", "typo", "fst", "spellcheck", "cli"]
 categories = ["command-line-utilities", "development-tools", "text-processing"]
 edition = "2024"
 
