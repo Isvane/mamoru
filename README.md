@@ -2,6 +2,9 @@
 
 Mamoru acts as a `commit-msg` hook that embeds a compiled dictionary to instantly catch and block typos before they enter your version control.
 
+[![Crates.io](https://img.shields.io/crates/v/mamoru.svg)](https://crates.io/crates/mamoru)
+[![Crates.io](https://img.shields.io/crates/l/mamoru)](https://github.com/Isvane/mamoru/blob/main/LICENSE)
+
 ---
 
 ## Installation
@@ -34,6 +37,14 @@ Commit blocked! Typos found in commit message:
 
 error: Please fix the spelling errors above.
 ```
+
+---
+
+## Acknowledgments
+
+Mamoru's built-in dictionary is compiled from a blend of standard natural language and specialized developer jargon, heavily drawing from:
+* **Linux system wordlists** (via `/usr/share/dict`) for robust, everyday English.
+* **[cspell](https://github.com/streetsidesoftware/cspell)** repositories for modern programming, DevOps, and open-source software terminology.
 
 ---
 
