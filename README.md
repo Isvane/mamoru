@@ -1,4 +1,4 @@
-# mamoru
+# 🛡️ Mamoru 
 
 Mamoru acts as a `commit-msg` hook that embeds a compiled dictionary to instantly catch and block typos before they enter your version control.
 
@@ -9,7 +9,7 @@ Mamoru acts as a `commit-msg` hook that embeds a compiled dictionary to instantl
 
 ## Installation
 
-Install the binary using Cargo:
+Install the binary using Cargo.
 ```bash
 cargo install mamoru
 ```
@@ -36,6 +36,11 @@ Commit blocked! Typos found in commit message:
   • "algorimth" -> Did you mean: algorithm?
 
 error: Please fix the spelling errors above.
+```
+
+To remove Mamoru.
+```bash
+mamoru --uninstall
 ```
 
 ---

@@ -3,10 +3,18 @@ static DICTIONARY_DATA: &[u8] = include_bytes!("../assets/dict.fst");
 mod cli;
 
 use clap::Parser;
-use cli::{Args, Format, check_commit, initialization};
+use cli::{Args, Format, check_commit, initialization, uninstall};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
+
+    if args.uninstall {
+        if let Err(e) = uninstall() {
+            eprintln!("Uninstallation failed: {}", e);
+            std::process::exit(1);
+        }
+        return Ok(());
+    }
 
     if args.init {
         if let Err(e) = initialization(&args) {
