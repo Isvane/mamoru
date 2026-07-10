@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2](https://github.com/Isvane/mamoru/compare/v0.1.1...v0.1.2) - 2026-07-10
+
+### Added
+
+- *(cli)* add uninstall flag to remove mamoru
+
+### Fixed
+
+- *(cli)* handle git scissors line and ignore URLs
+
+### Other
+
+- *(dict)* update wordlist
+- document performance and dictionary size
+- update release workflow
+
 ## [0.1.1](https://github.com/Isvane/mamoru/compare/v0.1.0...v0.1.1) - 2026-07-09
 
 ### Added
