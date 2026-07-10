@@ -94,14 +94,20 @@ pub fn check_commit(
     }
 
     let content = std::fs::read_to_string(path)?;
+
+    const GIT_SCISSORS: &str = "# ------------------------ >8 ------------------------";
+
     let lines: Vec<&str> = content
         .lines()
         .map(|line| line.trim())
+        .take_while(|line| !line.starts_with(GIT_SCISSORS))
         .filter(|line| !line.is_empty() && !line.starts_with('#'))
         .collect();
 
     let unique_words: HashSet<String> = lines
         .into_iter()
+        .flat_map(|line| line.split_whitespace())
+        .filter(|word| !word.starts_with("http://") && !word.starts_with("https://"))
         .flat_map(|line| line.split(|c: char| !c.is_alphabetic() && c != '\''))
         .filter(|word| !word.is_empty())
         .map(|word| word.trim_matches('\'').to_lowercase())
