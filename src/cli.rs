@@ -129,6 +129,7 @@ pub fn check_commit(
         .filter(|line| !line.is_empty() && !line.starts_with('#'))
         .flat_map(|line| line.split_whitespace())
         .filter(|word| !word.starts_with("http://") && !word.starts_with("https://"))
+        .filter(|word| !word.chars().any(|c| c.is_ascii_digit()))
         .flat_map(|line| line.split(|c: char| !c.is_alphabetic() && c != '\''))
         .filter(|word| !word.is_empty())
         .map(|word| word.trim_matches('\'').to_lowercase())
