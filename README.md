@@ -9,7 +9,6 @@ Mamoru acts as a `commit-msg` hook that embeds a compiled dictionary of **over 1
 
 ## Installation
 
-Install the binary using Cargo.
 ```bash
 cargo install mamoru
 ```
@@ -18,16 +17,16 @@ cargo install mamoru
 
 ## Usage
 
-Navigate to any Git repository and initialize the hook. This automatically configures Mamoru inside .git/hooks/commit-msg with the necessary executable permissions.
+Navigate to any Git repository and initialize the hook. This automatically configures Mamoru inside `.git/hooks/commit-msg` with the necessary executable permissions.
 ```bash
-mamoru --init
+mamoru init
 
 # If existing git hooks exist, use --force to overwrite it
-mamoru --init --force
+mamoru init --force
 ```
 
 Once installed, Mamoru intercepts your git commit commands automatically. If a commit contains unrecognized words, the hook safely aborts the commit and suggests corrections.
-```bash
+```
 $ git commit -m "feat: implment algorimth update"
 
 Commit blocked! Typos found in commit message:
@@ -40,19 +39,19 @@ error: Please fix the spelling errors above.
 
 To remove Mamoru.
 ```bash
-mamoru --uninstall
+mamoru uninstall
 ```
 
 ---
 
-## Performance
+## 🎈 Performance
 
-Benchmarks gathered using `hyperfine`.
-```bash
-$ hyperfine -N --warmup 10 --min-runs 10000 "./target/release/mamoru --path test_commit.txt"
+Benchmarks gathered using `hyperfine` (testing full dictionary load and typo analysis).
+```
+$ hyperfine -N --warmup 10 --min-runs 10000 "./target/release/mamoru check test_commit.txt"
 
-Time (mean ± σ):     487.6 µs ± 40.7 µs
-Range (min … max):   424.3 µs … 827.1 µs
+Time (mean ± σ):       2.5 ms ±   0.3 ms
+Range (min … max):     2.2 ms …   5.8 ms
 ```
 
 ---
