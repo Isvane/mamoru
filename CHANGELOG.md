@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0](https://github.com/Isvane/mamoru/compare/v0.1.2...v0.2.0) - 2026-07-11
+
+### Added
+
+- *(cli)* ignore alphanumeric strings
+
+### Other
+
+- *(cli)* optimize commit parsing
+- update README.md
+- *(cli)* [**breaking**] migrate to subcommands
+
 ## [0.1.2](https://github.com/Isvane/mamoru/compare/v0.1.1...v0.1.2) - 2026-07-10
 
 ### Added
