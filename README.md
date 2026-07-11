@@ -48,10 +48,16 @@ mamoru uninstall
 
 Benchmarks gathered using `hyperfine` (testing full dictionary load and typo analysis).
 ```
-$ hyperfine -N --warmup 10 --min-runs 10000 "./target/release/mamoru check test_commit.txt"
+$ hyperfine -N -i --warmup 10 --min-runs 10000 "./target/release/mamoru check test_commit.txt"
 
 Time (mean ± σ):       2.5 ms ±   0.3 ms
 Range (min … max):     2.2 ms …   5.8 ms
+```
+
+When no typo were found.
+```
+Time (mean ± σ):     534.6 µs ±  85.2 µs
+Range (min … max):   439.1 µs … 1279.7 µs
 ```
 
 ---
