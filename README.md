@@ -9,7 +9,7 @@ Mamoru acts as a `commit-msg` hook that embeds a compiled dictionary of **over 1
 
 ## Installation
 
-```bash
+```console
 cargo install mamoru
 ```
 
@@ -18,7 +18,7 @@ cargo install mamoru
 ## Usage
 
 Navigate to any Git repository and initialize the hook. This automatically configures Mamoru inside `.git/hooks/commit-msg` with the necessary executable permissions.
-```bash
+```console
 mamoru init
 
 # If existing git hooks exist, use --force to overwrite it
@@ -38,7 +38,7 @@ error: Please fix the spelling errors above.
 ```
 
 To remove Mamoru.
-```bash
+```console
 mamoru uninstall
 ```
 
