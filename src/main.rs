@@ -1,4 +1,4 @@
-static DICTIONARY_DATA: &[u8] = include_bytes!("../assets/dict.fst");
+static DICTIONARY_DATA: &[u8] = include_bytes!("../assets/mamoru.fst");
 
 mod cli;
 
