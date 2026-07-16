@@ -43,7 +43,12 @@ pub(crate) enum Commands {
 }
 
 pub fn initialization(force: bool) -> Result<(), Box<dyn std::error::Error>> {
-    let dir = Path::new(".git").join("hooks");
+    let git = Path::new(".git");
+
+    if !git.exists() {
+        return Err("The folder .git doesn't exist. Have you run `git init`?".into());
+    }
+    let dir = git.join("hooks");
 
     let path = dir.join("commit-msg");
 
