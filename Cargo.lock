@@ -137,9 +137,9 @@ checksum = "7ab85b9b05e3978cc9a9cf8fea7f01b494e1a09ed3037e16ba39edc7a29eb61a"
 
 [[package]]
 name = "fuzzies"
-version = "0.4.2"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2be754f2c56d26df63cae72dc9da455077f97d3a88094d31ea0dc252839f7f22"
+checksum = "6e87a22a49ff463c58325714a7e28146605e8205b8a5afea743048563ef716a8"
 dependencies = [
  "fst",
  "levenshtein_automata",

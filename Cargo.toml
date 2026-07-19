@@ -13,4 +13,4 @@ edition = "2024"
 
 [dependencies]
 clap = { version = "4.6.1", features = ["derive"] }
-fuzzies = "0.4.2"
+fuzzies = "0.5.2"
