@@ -146,9 +146,10 @@ pub fn check_commit(
     let mut ignored_words = HashSet::new();
 
     if mamoruignore.exists()
-        && let Ok(ignored) = std::fs::read_to_string(mamoruignore) {
-            ignored_words = ignored.lines().map(|w| w.trim().to_lowercase()).collect()
-        }
+        && let Ok(ignored) = std::fs::read_to_string(mamoruignore)
+    {
+        ignored_words = ignored.lines().map(|w| w.trim().to_lowercase()).collect()
+    }
 
     for word in unique_words {
         if ignored_words.contains(&word) {
@@ -156,7 +157,12 @@ pub fn check_commit(
         }
 
         if !dict.contains(&word) {
-            let suggestions = dict.search(&word).distance(2).limit(3).execute()?;
+            let suggestions = dict
+                .search(&word)
+                .distance(2)
+                .limit(3)
+                .transposition(true)
+                .execute()?;
 
             typos.push((word, suggestions));
         }
