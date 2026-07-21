@@ -168,6 +168,8 @@ pub fn check_commit(
         }
     }
 
+    typos.sort_unstable();
+
     if !typos.is_empty() {
         match format {
             Format::Silent => {
