@@ -1,6 +1,6 @@
 [package]
 name = "mamoru"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["Isvane <alyhazamy@protonmail.com>"]
 description = "A blazing-fast Git hook spell checker that flags typos in commit messages using finite state transducers."
 repository = "https://github.com/Isvane/mamoru"
