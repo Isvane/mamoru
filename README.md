@@ -17,7 +17,8 @@ cargo install mamoru
 
 ## Usage
 
-Navigate to any Git repository and initialize the hook. This automatically configures Mamoru inside `.git/hooks/commit-msg` with the necessary executable permissions.
+Navigate to any Git repository and initialize the hook. This automatically configures Mamoru inside `.git/hooks/commit-msg` with the necessary executable permissions:
+
 ```console
 mamoru init
 
@@ -25,7 +26,8 @@ mamoru init
 mamoru init --force
 ```
 
-Once installed, Mamoru intercepts your git commit commands automatically. If a commit contains unrecognized words, the hook safely aborts the commit and suggests corrections.
+Once installed, Mamoru intercepts your git commit commands automatically. If a commit contains unrecognized words, the hook safely aborts the commit and suggests corrections:
+
 ```
 $ git commit -m "feat: implment algorimth update"
 
@@ -37,7 +39,26 @@ Commit blocked! Typos found in commit message:
 error: Please fix the spelling errors above.
 ```
 
-To remove Mamoru.
+### Handling False Positives
+
+If Mamoru flags a valid word (like a company name, internal jargon, or a niche acronym), you can ignore it by creating a `.mamoruignore` file in the root of your repository. Simply add one word per line:
+
+```text
+// Inside .mamoruignore
+mycompanyname
+mycustomacronym
+```
+
+### Bypassing the Hook
+
+If you are in a rush and need to completely bypass the spellchecker for a single commit (without skipping all of your other git hooks via --no-verify), you can use the MAMORU_SKIP environment variable:
+
+```text
+MAMORU_SKIP=1 git commit -m "feat: fix bugz XYZ"
+```
+
+### Unintall
+
 ```console
 mamoru uninstall
 ```
