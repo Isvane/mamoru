@@ -115,6 +115,10 @@ pub fn check_commit(
     format: Format,
     ascii_only: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
+    if std::env::var("MAMORU_SKIP").is_ok() {
+        return Ok(());
+    }
+
     if !path.exists() {
         return Err(format!(
             "Commit message file not found at `{}`. Are you in the middle of a git commit?",
