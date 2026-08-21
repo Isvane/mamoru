@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.4](https://github.com/Isvane/mamoru/compare/v0.2.3...v0.2.4) - 2026-08-21
+
+### Added
+
+- *(toml)* add transposition and limit config
+- implement TOML support for ignoring words
+
+### Documentation
+
+- update README.md
+
 ## [0.2.3](https://github.com/Isvane/mamoru/compare/v0.2.2...v0.2.3) - 2026-07-22
 
 ### Added
