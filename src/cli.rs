@@ -148,6 +148,8 @@ pub fn check_commit(
 
     let config = Path::new("mamoru.toml");
     let mut ignored_words = HashSet::new();
+    let mut transposition: bool = true;
+    let mut limit: usize = 3;
 
     if config.exists() {
         if let Ok(content) = std::fs::read_to_string(config) {
@@ -158,6 +160,14 @@ pub fn check_commit(
                         .filter_map(|val| val.as_str())
                         .map(|w| w.trim().to_lowercase())
                         .collect();
+                }
+
+                if let Some(l) = conf.get("limit").and_then(|v| v.as_integer()) {
+                    limit = l as usize;
+                }
+
+                if let Some(t) = conf.get("transposition").and_then(|v| v.as_bool()) {
+                    transposition = t;
                 }
             }
         }
@@ -172,8 +182,8 @@ pub fn check_commit(
             let suggestions = dict
                 .search(&word)
                 .distance(2)
-                .limit(3)
-                .transposition(true)
+                .limit(limit)
+                .transposition(transposition)
                 .execute()?;
 
             typos.push((word, suggestions));

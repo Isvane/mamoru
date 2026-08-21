@@ -1,3 +1,5 @@
 ignore = [
     "fortesting"
 ]
+limit = 4
+transposition = true

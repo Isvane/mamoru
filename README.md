@@ -40,13 +40,22 @@ Commit blocked! Typos found in commit message:
 error: Please fix the spelling errors above.
 ```
 
-### Handling False Positives
+### Configuration
 
-If Mamoru flags a valid word (like a company name, internal jargon, or a niche acronym), you can ignore it by creating a `mamoru.toml` file in the root of your repository:
+You can customize Mamoru's behavior by placing a mamoru.toml file in the root directory of your repository.
 
 ```text
+# Max number of suggestions to return per typo (default: 3)
+limit = 5
+
+# Enable or disable adjacent character swap checks (default: true)
+transposition = true
+
+# Unrecognized words to ignore (e.g., project jargon, acronyms)
 ignore = [
-    "fortesting"
+    "fortesting",
+    "mamoru-cool",
+    "somewords",
 ]
 ```
 
