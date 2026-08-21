@@ -42,11 +42,12 @@ error: Please fix the spelling errors above.
 
 ### Handling False Positives
 
-If Mamoru flags a valid word (like a company name, internal jargon, or a niche acronym), you can ignore it by creating a `.mamoruignore` file in the root of your repository. Simply add one word per line:
+If Mamoru flags a valid word (like a company name, internal jargon, or a niche acronym), you can ignore it by creating a `mamoru.toml` file in the root of your repository:
 
-```bash
-mycompanyname
-mycustomacronym
+```text
+ignore = [
+    "fortesting"
+]
 ```
 
 ### Bypassing the Hook

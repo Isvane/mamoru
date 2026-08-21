@@ -146,13 +146,21 @@ pub fn check_commit(
 
     let mut typos = Vec::new();
 
-    let mamoruignore = Path::new(".mamoruignore");
+    let config = Path::new("mamoru.toml");
     let mut ignored_words = HashSet::new();
 
-    if mamoruignore.exists()
-        && let Ok(ignored) = std::fs::read_to_string(mamoruignore)
-    {
-        ignored_words = ignored.lines().map(|w| w.trim().to_lowercase()).collect()
+    if config.exists() {
+        if let Ok(content) = std::fs::read_to_string(config) {
+            if let Ok(conf) = content.parse::<toml::Table>() {
+                if let Some(ignored_list) = conf.get("ignore").and_then(|v| v.as_array()) {
+                    ignored_words = ignored_list
+                        .iter()
+                        .filter_map(|val| val.as_str())
+                        .map(|w| w.trim().to_lowercase())
+                        .collect();
+                }
+            }
+        }
     }
 
     for word in unique_words {
