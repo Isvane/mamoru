@@ -1,4 +1,4 @@
-# Mamoru 
+# mamoru 
 
 Mamoru acts as a `commit-msg` hook that embeds a compiled dictionary of **over 106,000 words** to instantly catch and block typos before they enter your version control.
 
@@ -54,7 +54,7 @@ transposition = true
 # Unrecognized words to ignore (e.g., project jargon, acronyms)
 ignore = [
     "fortesting",
-    "mamoru-cool",
+    "rustiest",
     "somewords",
 ]
 ```
